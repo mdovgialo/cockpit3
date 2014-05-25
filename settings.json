@@ -1,0 +1,9 @@
+{
+    "url":"http://localhost:8111/",
+    "dt":10,
+    "indicators":["flaps" ],
+    "indicator_setings" : {
+     "flaps":{"x":0, "y":0, "size":1.0}
+    },
+    "as_overlay":false,
+}
