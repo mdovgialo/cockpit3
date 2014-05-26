@@ -41,6 +41,7 @@ public slots:
 
     void run_cockpit()
     {
+        this->centralWidget()->deleteLater();
         InstrumentPanel* ip= new InstrumentPanel(settings.object(), this);
         setCentralWidget(ip);
     }

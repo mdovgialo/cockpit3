@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QJsonObject>
+#include <QLabel>
 
 
 class Settings : public QWidget
@@ -24,6 +25,8 @@ public:
 private:
     QLineEdit* url;
     QSpinBox* dt;
+public slots:
+    void show_editor();
 };
 
 #endif // SETTINGS_H

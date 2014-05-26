@@ -9,20 +9,20 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent):actual(s
     int dt = settings.find("dt").value().toDouble();
     connect(&actual, SIGNAL(parseFinished()), this, SLOT(update()));
 
-    QJsonObject::iterator f = settings["instruments"].toObject().begin();
-    QJsonObject::iterator l = settings["instruments"].toObject().end();
-    QString instrument;
-    for (;f!=l;++f)
+    QJsonObject instruments = settings["instruments"].toObject();
+    QStringList l = instruments.keys();
+    setLayout(new QHBoxLayout());
+    for(int i = 0;i<l.size();++i)
     {
-        //cout << "Creating! "<< f.key().toStdString()<<endl;
-        instrument = f.key();
-        if (instrument == QString("generic"))
+
+        if(l.at(i)==QString("generic"))
         {
-            cout << "Creating! "<< f.key().toStdString()<<endl;
-            new GenericIndicator(f.value().toObject(), this);
+            cout << "Creating: " << l.at(i).toStdString()<<endl;
+            GenericIndicator* ind = new GenericIndicator(instruments[l.at(i)].toObject(), this);
 
+            ind->setGeometry(0,0, 200, 200);
+            //new GenericIndicator(instruments[l.at(i)].toObject(), this);
         }
-
     }
 
     updater = new QTimer();

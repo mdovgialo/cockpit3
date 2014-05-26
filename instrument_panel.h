@@ -8,9 +8,8 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QTimer>
-#
-#include <vector>
-
+#include <QStringList>
+#include <QLayout>
 
 class InstrumentPanel : public QWidget
 {
