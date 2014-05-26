@@ -1,33 +1,33 @@
 #include "instrument_panel.h"
 #include "genericindicator.h"
+#include "flapsindicator.h"
 #include <iostream>
+#include <QApplication>
 using namespace std;
 
 
-InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool editMode):actual(settings.find("url").value().toString())
+InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool editMode, bool overlay):
+    actual(settings.find("url").value().toString()), overlay(overlay)
 {
     this->editMode = editMode;
     int dt = settings.find("dt").value().toDouble();
     connect(&actual, SIGNAL(parseFinished()), this, SLOT(update()));
 
-    QJsonObject instruments = settings["instruments"].toObject();
-    QStringList l = instruments.keys();
-
-    for(int i = 0;i<l.size();++i)
+    QJsonArray instruments = settings["instruments"].toArray();
+    if(!overlay and !editMode)
     {
-
-        if(l.at(i)==QString("generic"))
-        {
-            cout << "Creating: " << l.at(i).toStdString()<<endl;
-            GenericIndicator* ind = new GenericIndicator(instruments[l.at(i)].toObject(), this, editMode);
-
-        }
+        qApp->setStyleSheet("QWidget {color:white; background-color: black} ");
+    }
+    else if(overlay and !editMode)
+    {
+         qApp->setStyleSheet("QWidget {color:white}");
     }
 
     updater = new QTimer();
     if(editMode)
     {
-        editor* ed = new editor(settings, 0);
+        Editor* ed = new Editor(settings,this, parent);
+
         ed->show();
     }
     else
@@ -38,11 +38,47 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
     }
 
 
+    for(int i = 0;i<instruments.size();++i)
+    {
+        GenericIndicator* inst=0;
+
+        QJsonObject instrument = instruments[i].toObject();
+        if(instrument["type"].toString()==QString("generic"))
+        {
+            cout << "Creating: " << instrument["type"].toString().toStdString()<<endl;
+             inst = new GenericIndicator(instrument, i, this, editMode);
+
+
+
+
+        }
+        else if(instrument["type"].toString()==QString("flaps"))
+        {
+            inst = new FlapsIndicator(instrument, i, this, editMode);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 }
 
 void InstrumentPanel::update()
 {
     emit panel_update(&actual);
+
+
+}
+
+bool InstrumentPanel::getOverlay()
+{
+    return overlay;
 
 
 }

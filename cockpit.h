@@ -4,25 +4,28 @@
 #include <QMainWindow>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QScrollArea>
 
 #include <QFile>
 #include "settings.h"
 #include "instrument_panel.h"
 #include <iostream>
+
 using namespace std;
 
 class Cockpit: public QMainWindow
 {
     Q_OBJECT
-
+    bool overlay;
 public:
 
-    explicit Cockpit();
+    explicit Cockpit(bool overlay=0);
 
 
 
 
 public slots:
+    void set_overlay(int);
     void savesettings();
     void set_dt(int dt)
     {
@@ -42,20 +45,35 @@ public slots:
     void run_cockpit()
     {
         this->centralWidget()->deleteLater();
-        InstrumentPanel* ip= new InstrumentPanel(settings.object(), this);
+        InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, 0, overlay);
         setCentralWidget(ip);
 
     }
 
-    void run_edit()
+    void run_edit(QJsonObject* newsettings=0)
     {
+        if (newsettings)
+        {
+            settings.setObject(*newsettings);
+        }
         this->centralWidget()->deleteLater();
-        InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, true);
+        InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, true, overlay);
         setCentralWidget(ip);
 
     }
+    void run_settings(QJsonObject* newsettings=0)
+    {
+        if (newsettings)
+        {
+            settings.setObject(*newsettings);
+        }
+        this->centralWidget()->deleteLater();
+        Settings* s = new Settings(settings.object(), this, overlay);
+        this->setCentralWidget(s);
 
-private:
+    }
+
+protected:
     QJsonDocument settings;
 };
 

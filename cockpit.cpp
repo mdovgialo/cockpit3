@@ -5,18 +5,26 @@
 #define SETTINGSFILE "settings.json"
 
 using namespace std;
-Cockpit::Cockpit()
+Cockpit::Cockpit(bool overlay):overlay(overlay)
 
 
     {
+
+
         QFile sf(SETTINGSFILE);
         sf.open(QIODevice::ReadOnly | QIODevice::Text);
         QJsonParseError e;
         settings = QJsonDocument::fromJson(sf.readAll(), &e);
         cout << e.errorString().toStdString()<<endl;
-        Settings* s = new Settings(settings.object(), this);
+
+        Settings* s = new Settings(settings.object(), this,overlay);
         this->setCentralWidget(s);
+
         sf.close();
+
+
+
+        QObject::connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(savesettings()));
 
 
 
@@ -31,3 +39,31 @@ void Cockpit::savesettings()
      saveFile.close();
 }
 
+void Cockpit::set_overlay(int check)
+{
+
+
+    if(check)
+    {
+
+        Cockpit* nc = new Cockpit(1);
+        nc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+
+        nc->setAttribute(Qt::WA_TranslucentBackground, true);
+
+        //this->setStyleSheet("background-color: rgba(0, 0, 0, 100%);");
+        nc->showFullScreen();
+        this->deleteLater();
+
+
+    }
+    else
+    {
+        Cockpit* nc = new Cockpit();
+
+
+        nc->show();
+        this->deleteLater();
+    }
+
+}

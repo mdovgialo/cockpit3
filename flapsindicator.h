@@ -1,16 +1,16 @@
 #ifndef FLAPSINDICATOR_H
 #define FLAPSINDICATOR_H
 #include "genericindicator.h"
-class FlapsIndicator : public QWidget
+class FlapsIndicator : public GenericIndicator
 {
     Q_OBJECT
 public:
-    explicit FlapsIndicator(InstrumentPanel *parent = 0);
+    explicit FlapsIndicator(QJsonObject params, int nr, InstrumentPanel *parent = 0, bool edit=1);
 
 signals:
 
 public slots:
-    void update(Gamestate*);
+
 
 };
 

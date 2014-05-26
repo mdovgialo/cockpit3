@@ -10,6 +10,8 @@
 #include <QSpinBox>
 #include <QJsonObject>
 #include <QLabel>
+#include <QCheckBox>
+
 
 
 class Settings : public QWidget
@@ -18,7 +20,7 @@ class Settings : public QWidget
 
 
 public:
-    Settings(QJsonObject settings, QWidget *parent = 0);
+    Settings(QJsonObject settings, QWidget *parent = 0, bool overlay=0);
     ~Settings();
 
 

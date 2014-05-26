@@ -18,12 +18,19 @@
 class GenericIndicator : public QWidget
 {
     Q_OBJECT
+    int nr;
 public:
-    explicit GenericIndicator(QJsonObject params, InstrumentPanel *parent = 0, bool edit=1);
+    explicit GenericIndicator(QJsonObject params, int nr, InstrumentPanel *parent = 0, bool edit=1);
     virtual void mousePressEvent(QMouseEvent *);
     virtual void mouseMoveEvent(QMouseEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void wheelEvent(QWheelEvent *);
+    virtual int get_nr()
+    {
+        return nr;
+    }
+    virtual float getFontSize()
+    { return fonts;}
 
 signals:
 
@@ -32,6 +39,7 @@ public slots:
 protected:
     bool editMode;
     bool moving;
+    float fonts;
     QJsonObject params;
     QLabel text;
 

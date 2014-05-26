@@ -29,6 +29,7 @@ void Gamestate::parse(QNetworkReply* reply)
                 \"IAS, km/h\": 281,\
                 \"M\": 0.27,\
                 \"flaps, %\":33,\
+                \"gear, %\":44,\
                 \"AoA, deg\": -0.7,\
                 \"AoS, deg\": 0.1,\
                 \"Ny\": 0.99,\
