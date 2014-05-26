@@ -25,7 +25,8 @@ Settings::Settings(QJsonObject settings, QWidget *parent)
     connect(url, SIGNAL(textChanged(QString)), parent, SLOT(set_url(QString)));
     connect(dt, SIGNAL(valueChanged(int)), parent, SLOT(set_dt(int)));
     connect(run, SIGNAL(clicked()), parent, SLOT(run_cockpit()));
-    connect(editor, SIGNAL(clicked()), this, SLOT(show_editor()));
+   // connect(editor, SIGNAL(clicked()), this, SLOT(show_editor()));
+    connect(editor, SIGNAL(clicked()), parent, SLOT(run_edit()));
 
 
 
@@ -36,6 +37,7 @@ Settings::Settings(QJsonObject settings, QWidget *parent)
 void Settings::show_editor()
 {
     this->parentWidget()->hide();
+
 
 }
 Settings::~Settings()

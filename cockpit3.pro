@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     gamestate.cpp \
     cockpit.cpp \
     flapsindicator.cpp \
-    genericindicator.cpp
+    genericindicator.cpp \
+    editor.cpp
 
 HEADERS  += settings.h \
     instrument_panel.h \
     gamestate.h \
     cockpit.h \
     flapsindicator.h \
-    genericindicator.h
+    genericindicator.h \
+    editor.h
 
 CONFIG +=
 MOBILITY = 

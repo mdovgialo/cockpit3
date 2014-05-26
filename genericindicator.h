@@ -14,16 +14,16 @@
 #include <QFont>
 #include <QMouseEvent>
 #include <QWheelEvent>
-
+#include <QFontMetrics>
 class GenericIndicator : public QWidget
 {
     Q_OBJECT
 public:
     explicit GenericIndicator(QJsonObject params, InstrumentPanel *parent = 0, bool edit=1);
-    void mousePressEvent(QMouseEvent *);
-    void mouseMoveEvent(QMouseEvent *);
-    void mouseReleaseEvent(QMouseEvent *);
-    void wheelEvent(QWheelEvent *);
+    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseMoveEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
+    virtual void wheelEvent(QWheelEvent *);
 
 signals:
 

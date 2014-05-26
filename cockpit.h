@@ -44,6 +44,15 @@ public slots:
         this->centralWidget()->deleteLater();
         InstrumentPanel* ip= new InstrumentPanel(settings.object(), this);
         setCentralWidget(ip);
+
+    }
+
+    void run_edit()
+    {
+        this->centralWidget()->deleteLater();
+        InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, true);
+        setCentralWidget(ip);
+
     }
 
 private:

@@ -2,6 +2,7 @@
 #define INSTRUMENT_PANEL_H
 
 #include "gamestate.h"
+#include "editor.h"
 #include <QUrl>
 #include <QString>
 #include <QWidget>
@@ -15,11 +16,12 @@ class InstrumentPanel : public QWidget
 {
     Q_OBJECT
     public:
-        InstrumentPanel(QJsonObject settings, QWidget *parent = 0);
+        InstrumentPanel(QJsonObject settings, QWidget *parent = 0, bool editMode=0);
         ~InstrumentPanel();
     private:
         Gamestate actual;
         QTimer* updater;
+        bool editMode;
         int dt;
         //vector<QWidget*> instruments;
     signals:

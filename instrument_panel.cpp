@@ -4,31 +4,38 @@
 using namespace std;
 
 
-InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent):actual(settings.find("url").value().toString())
+InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool editMode):actual(settings.find("url").value().toString())
 {
+    this->editMode = editMode;
     int dt = settings.find("dt").value().toDouble();
     connect(&actual, SIGNAL(parseFinished()), this, SLOT(update()));
 
     QJsonObject instruments = settings["instruments"].toObject();
     QStringList l = instruments.keys();
-    setLayout(new QHBoxLayout());
+
     for(int i = 0;i<l.size();++i)
     {
 
         if(l.at(i)==QString("generic"))
         {
             cout << "Creating: " << l.at(i).toStdString()<<endl;
-            GenericIndicator* ind = new GenericIndicator(instruments[l.at(i)].toObject(), this);
+            GenericIndicator* ind = new GenericIndicator(instruments[l.at(i)].toObject(), this, editMode);
 
-            ind->setGeometry(0,0, 200, 200);
-            //new GenericIndicator(instruments[l.at(i)].toObject(), this);
         }
     }
 
     updater = new QTimer();
+    if(editMode)
+    {
+        editor* ed = new editor(settings, 0);
+        ed->show();
+    }
+    else
+    {
     connect(updater, SIGNAL(timeout()), &actual, SLOT(update()));
     updater->start(dt);
     cout << "Started updater"<<endl;
+    }
 
 
 }
