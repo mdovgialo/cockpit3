@@ -16,10 +16,11 @@ FlapsIndicator::FlapsIndicator(QJsonObject params, int nr, InstrumentPanel *pare
 
 void FlapsIndicator::update_ind(Gamestate* actual)
 {
+    QJsonObject info = actual->state.object();
     if(actual->state.object()["valid"].toBool())
     {
         text.setPixmap(pic->scaled(text.size(), Qt::KeepAspectRatio));
-        this->show();
+
 
         QPixmap dev = *(text.pixmap());
         painter->begin(&dev);
@@ -27,9 +28,9 @@ void FlapsIndicator::update_ind(Gamestate* actual)
         pen.setWidthF(0.3/4.8*text.size().height());
         painter->setPen(pen);
 
-        int flaps = actual->state.object()["flaps, %"].toDouble();
-        int airbrake = actual->state.object()["airbrake, %"].toDouble();
-        int gear = actual->state.object()["gear, %"].toDouble();
+        int flaps = info["flaps, %"].toDouble();
+        int airbrake = info["airbrake, %"].toDouble();
+        int gear = info["gear, %"].toDouble();
 
 
         int x1, x2, y1, y2;
@@ -77,8 +78,16 @@ void FlapsIndicator::update_ind(Gamestate* actual)
         text.setPixmap(dev);
 
     }
-    else
+
+    if(!(actual->state.object()["valid"].toBool()) or\
+                 (info["flaps, %"].isNull()\
+                  and info["gear, %"].isNull()\
+                  and info["airbrake, %"].isNull()))
+    {
         this->hide();
+    }
+    else
+        this->show();
 }
 
 void FlapsIndicator::wheelEvent(QWheelEvent *e)

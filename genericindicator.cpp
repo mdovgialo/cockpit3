@@ -45,8 +45,11 @@ void GenericIndicator::update_ind(Gamestate *upd)
             data = QString::number(upd->state.object()[ind].toDouble());
         }
         else
+        {
             data = "N/A";
-        text.setText(params["title"].toString() + data + params["suffix"].toString());
+            this->hide();
+        }
+            text.setText(params["title"].toString() + data + params["suffix"].toString());
     }
     else
     {

@@ -43,6 +43,6 @@ void Variometer::update_ind(Gamestate* actual)
 
 
     }
-    else
+    if(!(actual->state.object()["valid"].toBool()) or actual->state.object()["Vy, m/s"].isNull())
         this->hide();
 }

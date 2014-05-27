@@ -2,7 +2,9 @@
 #include <QApplication>
 
 #include "cockpit.h"
-
+//Warthunder Cockpit "Rebirth"
+// By M. "iikun" D.
+//LGPL
 
 int main(int argc, char *argv[])
 {
