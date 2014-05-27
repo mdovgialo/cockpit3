@@ -52,10 +52,12 @@ public slots:
 
     void run_edit(QJsonObject* newsettings=0)
     {
+
         if (newsettings)
         {
             settings.setObject(*newsettings);
         }
+
         this->centralWidget()->deleteLater();
         InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, true, overlay);
         setCentralWidget(ip);
