@@ -1,8 +1,9 @@
 #include "instrument_panel.h"
 #include "genericindicator.h"
 #include "flapsindicator.h"
+#include "variometer.h"
 #include <iostream>
-#include <QApplication>
+
 using namespace std;
 
 
@@ -55,6 +56,19 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
         else if(instrument["type"].toString()==QString("flaps"))
         {
             inst = new FlapsIndicator(instrument, i, this, editMode);
+        }
+        else if(instrument["type"].toString()==QString("vario"))
+        {
+            inst = new Variometer(instrument, i, this, editMode);
+        }
+        if(overlay)
+        {
+            QGraphicsDropShadowEffect* ef = new QGraphicsDropShadowEffect(inst);
+            ef->setBlurRadius(5);
+            ef->setColor(QColor(0,0,0));
+            ef->setXOffset(0.0);
+            ef->setYOffset(0.0);
+            inst->setGraphicsEffect(ef);
         }
 
     }

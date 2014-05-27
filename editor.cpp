@@ -14,11 +14,18 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
     add->setMenu(addmenu);
     QAction *addgeneric = new QAction("Generic", addmenu);
     QAction *addflaps = new QAction("Flaps", addmenu);
+    QAction *addvario = new QAction("Variometer", addmenu);
+
+
 
     addmenu->addAction(addgeneric);
     addmenu->addAction(addflaps);
+    addmenu->addAction(addvario);
+
     connect(addgeneric, SIGNAL(triggered()), this, SLOT(add_generic()));
     connect(addflaps, SIGNAL(triggered()), this, SLOT(add_flaps()));
+    connect(addvario, SIGNAL(triggered()), this, SLOT(add_vario()));
+
 
     QPushButton *done = new QPushButton("Done");
     QPushButton *rem = new QPushButton();
@@ -119,10 +126,28 @@ void Editor::add_flaps()
 
     instr.push_back(i);
     params["instruments"]=instr;
-    ask->deleteLater();
     this->deleteLater();
     emit settings_updated(&params);
 }
+
+void Editor::add_vario()
+{
+    QJsonArray instr = params["instruments"].toArray();
+    QJsonObject i;
+    i["x"] = 0;
+    i["y"] = 0;
+    i["h"] =200;
+    i["w"] =200;
+    i["ind_name"] = "Vy, %";
+    i["type"] = "vario";
+
+
+    instr.push_back(i);
+    params["instruments"]=instr;
+    this->deleteLater();
+    emit settings_updated(&params);
+}
+
 void Editor::rem_instrument()
 {
     QJsonArray instr = params["instruments"].toArray();

@@ -21,7 +21,7 @@ void Gamestate::parse(QNetworkReply* reply)
     {
         state = QJsonDocument::fromJson(reply->readAll().data());
         //for debuging purposes
-        QString bbbb = "{\"valid\": true,\
+       /* QString bbbb = "{\"valid\": true,\
                 \"aileron, %\": 0,\
                 \"elevator, %\": -4,\
                 \"rudder, %\": 1,\
@@ -58,7 +58,7 @@ void Gamestate::parse(QNetworkReply* reply)
                 \"thrust 2, kgs\": 1175,\
                 \"efficiency 2, %\": 54}\
                 ";
-        state = QJsonDocument::fromJson(QByteArray(bbbb.toStdString().c_str()));
+        state = QJsonDocument::fromJson(QByteArray(bbbb.toStdString().c_str()));*/
     }
     else if(p == QString("/indicators"))
             {

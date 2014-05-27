@@ -87,6 +87,7 @@ void GenericIndicator::wheelEvent(QWheelEvent *e)
 {
     if(editMode)
     {
+        cout<<"Resizing generic";
         QFont f = text.font();
         f.setPointSizeF(f.pointSizeF()+e->angleDelta().y()/120);
         this->fonts= f.pointSizeF();

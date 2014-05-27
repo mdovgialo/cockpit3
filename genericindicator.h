@@ -18,7 +18,7 @@
 class GenericIndicator : public QWidget
 {
     Q_OBJECT
-    int nr;
+
 public:
     explicit GenericIndicator(QJsonObject params, int nr, InstrumentPanel *parent = 0, bool edit=1);
     virtual void mousePressEvent(QMouseEvent *);
@@ -42,6 +42,7 @@ protected:
     float fonts;
     QJsonObject params;
     QLabel text;
+    int nr;
 
 };
 

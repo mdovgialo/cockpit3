@@ -34,6 +34,8 @@ public slots:
     void add_generic();
     void add_generic_params();
     void add_flaps();
+    void add_vario();
+
 
 
 };

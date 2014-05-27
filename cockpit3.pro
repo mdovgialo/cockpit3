@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     cockpit.cpp \
     flapsindicator.cpp \
     genericindicator.cpp \
-    editor.cpp
+    editor.cpp \
+    variometer.cpp
 
 HEADERS  += settings.h \
     instrument_panel.h \
@@ -27,11 +28,13 @@ HEADERS  += settings.h \
     cockpit.h \
     flapsindicator.h \
     genericindicator.h \
-    editor.h
+    editor.h \
+    variometer.h
 
 CONFIG +=
 MOBILITY = 
 
 OTHER_FILES += \
-    settings.json
+    settings.json \
+    images/flaps.png
 
