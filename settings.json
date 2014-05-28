@@ -1,9 +1,88 @@
 {
-    "url":"http://localhost:8111/",
-    "dt":10,
-    "indicators":["flaps" ],
-    "indicator_setings" : {
-     "flaps":{"x":0, "y":0, "size":1.0}
-    },
-    "as_overlay":false,
+    "dt": 30,
+    "instruments": [
+        {
+            "fonts": 0,
+            "h": 65,
+            "ind_name": "flaps, %",
+            "type": "flaps",
+            "w": 76,
+            "x": 1297,
+            "y": 292
+        },
+        {
+            "fonts": 0,
+            "h": 228,
+            "ind_name": "Vy, %",
+            "type": "vario",
+            "w": 228,
+            "x": 1156,
+            "y": 194
+        },
+        {
+            "fonts": 7.25,
+            "h": 33,
+            "ind_name": "power 1, hp",
+            "suffix": " hp",
+            "title": "P1 ",
+            "type": "generic",
+            "w": 73,
+            "x": 1289,
+            "y": 413
+        },
+        {
+            "fonts": 7.25,
+            "h": 33,
+            "ind_name": "power 2, hp",
+            "suffix": " hp",
+            "title": "P2 ",
+            "type": "generic",
+            "w": 73,
+            "x": 1289,
+            "y": 424
+        },
+        {
+            "fonts": 7.25,
+            "h": 33,
+            "ind_name": "power 3, hp",
+            "suffix": " hp",
+            "title": "P3 ",
+            "type": "generic",
+            "w": 73,
+            "x": 1289,
+            "y": 433
+        },
+        {
+            "fonts": 7.25,
+            "h": 33,
+            "ind_name": "power 4, hp",
+            "suffix": " hp",
+            "title": "P4 ",
+            "type": "generic",
+            "w": 73,
+            "x": 1289,
+            "y": 445
+        },
+        {
+            "fonts": 10.25,
+            "h": 39,
+            "ind_name": "oil temp 1, C",
+            "suffix": " C",
+            "title": "Oil ",
+            "type": "generic",
+            "w": 90,
+            "x": 1238,
+            "y": 258
+        },
+        {
+            "fonts": 0,
+            "h": 392,
+            "ind_name": "Map",
+            "type": "map",
+            "w": 392,
+            "x": 971,
+            "y": 374
+        }
+    ],
+    "url": "http://localhost:8111"
 }
