@@ -15,16 +15,20 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
     QAction *addgeneric = new QAction("Generic", addmenu);
     QAction *addflaps = new QAction("Flaps", addmenu);
     QAction *addvario = new QAction("Variometer", addmenu);
+    QAction *addmap = new QAction("Map", addmenu);
 
 
 
     addmenu->addAction(addgeneric);
     addmenu->addAction(addflaps);
     addmenu->addAction(addvario);
+    addmenu->addAction(addmap);
+
 
     connect(addgeneric, SIGNAL(triggered()), this, SLOT(add_generic()));
     connect(addflaps, SIGNAL(triggered()), this, SLOT(add_flaps()));
     connect(addvario, SIGNAL(triggered()), this, SLOT(add_vario()));
+    connect(addmap, SIGNAL(triggered()), this, SLOT(add_map()));
 
 
     QPushButton *done = new QPushButton("Done");
@@ -122,6 +126,24 @@ void Editor::add_flaps()
     i["w"] =50;
     i["ind_name"] = "flaps, %";
     i["type"] = "flaps";
+
+
+    instr.push_back(i);
+    params["instruments"]=instr;
+    this->deleteLater();
+    emit settings_updated(&params);
+}
+
+void Editor::add_map()
+{
+    QJsonArray instr = params["instruments"].toArray();
+    QJsonObject i;
+    i["x"] = 0;
+    i["y"] = 0;
+    i["h"] =300;
+    i["w"] =300;
+    i["ind_name"] = "Map";
+    i["type"] = "map";
 
 
     instr.push_back(i);

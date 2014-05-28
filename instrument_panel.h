@@ -34,6 +34,7 @@ class InstrumentPanel : public QWidget
         InstrumentPanel(QJsonObject settings, QWidget *parent = 0, bool editMode=0, bool overlay=0);
         ~InstrumentPanel();
         bool getOverlay();
+        QJsonObject settings;
     private:
         Gamestate actual;
         bool overlay;
@@ -43,8 +44,10 @@ class InstrumentPanel : public QWidget
         //vector<QWidget*> instruments;
     signals:
         void panel_update(Gamestate*);
+        void map_update(Gamestate*);
     public slots:
         void update();
+        void map_updated();
 
 
 

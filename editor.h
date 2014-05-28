@@ -35,6 +35,7 @@ public slots:
     void add_generic_params();
     void add_flaps();
     void add_vario();
+    void add_map();
 
 
 

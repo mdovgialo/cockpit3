@@ -4,8 +4,8 @@ using namespace std;
 
 
 
-GenericIndicator::GenericIndicator(QJsonObject params, int nr, InstrumentPanel *parent, bool edit):
-    QWidget(parent), editMode(edit), params(params), nr(nr)
+GenericIndicator::GenericIndicator(QJsonObject params, int nr, InstrumentPanel *parent, bool edit, bool overlay):
+    QWidget(parent), editMode(edit), params(params), nr(nr), overlay(overlay)
 {
 
 

@@ -20,7 +20,7 @@ class GenericIndicator : public QWidget
     Q_OBJECT
 
 public:
-    explicit GenericIndicator(QJsonObject params, int nr, InstrumentPanel *parent = 0, bool edit=1);
+    explicit GenericIndicator(QJsonObject params, int nr, InstrumentPanel *parent = 0, bool edit=1, bool overlay=0);
     virtual void mousePressEvent(QMouseEvent *);
     virtual void mouseMoveEvent(QMouseEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
@@ -43,6 +43,7 @@ protected:
     QJsonObject params;
     QLabel text;
     int nr;
+    bool overlay;
 
 };
 

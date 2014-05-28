@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     flapsindicator.cpp \
     genericindicator.cpp \
     editor.cpp \
-    variometer.cpp
+    variometer.cpp \
+    mapindicator.cpp
 
 HEADERS  += settings.h \
     instrument_panel.h \
@@ -29,7 +30,8 @@ HEADERS  += settings.h \
     flapsindicator.h \
     genericindicator.h \
     editor.h \
-    variometer.h
+    variometer.h \
+    mapindicator.h
 
 CONFIG +=
 MOBILITY = 

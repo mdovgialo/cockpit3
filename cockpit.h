@@ -11,6 +11,8 @@
 #include "instrument_panel.h"
 #include <iostream>
 
+
+
 using namespace std;
 
 class Cockpit: public QMainWindow
