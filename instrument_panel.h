@@ -46,7 +46,7 @@ class InstrumentPanel : public QWidget
         void panel_update(Gamestate*);
         void map_update(Gamestate*);
     public slots:
-        void update();
+        void update_stuff();
         void map_updated();
 
 

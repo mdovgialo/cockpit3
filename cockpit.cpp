@@ -51,7 +51,7 @@ void Cockpit::set_overlay(int check)
         nc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
         nc->setAttribute(Qt::WA_TranslucentBackground, true);
-        nc->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+        //nc->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
         //this->setStyleSheet("background-color: rgba(0, 0, 0, 100%);");
         nc->showFullScreen();

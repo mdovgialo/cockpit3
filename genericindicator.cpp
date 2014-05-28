@@ -22,6 +22,7 @@ GenericIndicator::GenericIndicator(QJsonObject params, int nr, InstrumentPanel *
     //setGeometry(this->x(), this->y(),text.size().width(), text.size().height());
     this->move(params["x"].toDouble(), params["y"].toDouble());
     this->resize(text.size());
+    text.move(0,0);
     connect(parent, SIGNAL(panel_update(Gamestate*)), this, SLOT(update_ind(Gamestate*)));
 }
 
@@ -63,6 +64,7 @@ void GenericIndicator::update_ind(Gamestate *upd)
      if (editMode)
      {
         this->moving=true;
+         cout<< "MOVE!!!"<<endl;
      }
  }
 

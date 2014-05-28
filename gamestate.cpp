@@ -17,7 +17,7 @@ Gamestate::~Gamestate()
 void Gamestate::parse(QNetworkReply* reply)
 {
     //cout << reply->error()<<endl;
-    if(not reply->error())
+    if((not reply->error()))
     {
         QString p = reply->url().path();
         if(p == QString("/state"))

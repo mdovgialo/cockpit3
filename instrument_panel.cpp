@@ -13,7 +13,7 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
 {
     this->editMode = editMode;
     int dt = settings.find("dt").value().toDouble();
-    connect(&actual, SIGNAL(parseFinished()), this, SLOT(update()));
+    connect(&actual, SIGNAL(parseFinished()), this, SLOT(update_stuff()));
     connect(&actual, SIGNAL(mapParseFinished()), this, SLOT(map_updated()));
     QJsonArray instruments = settings["instruments"].toArray();
     if(!overlay and !editMode)
@@ -25,6 +25,7 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
     {
          qApp->setStyleSheet("QWidget {color:white}");
     }
+
 
     updater = new QTimer();
     if(editMode)
@@ -48,11 +49,7 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
         QJsonObject instrument = instruments[i].toObject();
         if(instrument["type"].toString()==QString("generic"))
         {
-            cout << "Creating: " << instrument["type"].toString().toStdString()<<endl;
              inst = new GenericIndicator(instrument, i, this, editMode);
-
-
-
 
         }
         else if(instrument["type"].toString()==QString("flaps"))
@@ -75,22 +72,19 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
             ef->setXOffset(0.0);
             ef->setYOffset(0.0);
             inst->setGraphicsEffect(ef);
-            inst->setAttribute(Qt::WA_TransparentForMouseEvents);
+           // inst->setAttribute(Qt::WA_TransparentForMouseEvents);
         }
 
     }
-
-
-
-
-
-
-
-
+    if(not editMode)
+    {
+        map_updated();
+        update_stuff();
+    }
 
 }
 
-void InstrumentPanel::update()
+void InstrumentPanel::update_stuff()
 {
     emit panel_update(&actual);
 

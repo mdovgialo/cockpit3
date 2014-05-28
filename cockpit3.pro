@@ -33,10 +33,15 @@ HEADERS  += settings.h \
     variometer.h \
     mapindicator.h
 
-CONFIG +=
+CONFIG += openssl-linked
 MOBILITY = 
+
 
 OTHER_FILES += \
     settings.json \
-    images/flaps.png
+    images/flaps.png \
+    images/vario.png \
+    images/vario_needle.png
+
+
 
