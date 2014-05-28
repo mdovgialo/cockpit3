@@ -152,7 +152,7 @@ void MapIndicator::update_ind(Gamestate* actual)
                obj->show();
            }
 
-           if( mapObj[i].toObject()["icon_bg"].toString().indexOf("Target")>-1)
+           /*if( mapObj[i].toObject()["icon_bg"].toString().indexOf("Target")>-1)
            {
                obj = new QLabel(mapObjects);
                obj->setText( QString("Target distance: ")+QString::number(dist));
@@ -163,7 +163,7 @@ void MapIndicator::update_ind(Gamestate* actual)
 
                obj->setStyleSheet(QString("QLabel { font: bold 15px; color: red}"));
                obj->resize(obj->sizeHint());
-           }
+           }*/
 
         }
         mapObjects->raise();
