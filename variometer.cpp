@@ -1,5 +1,5 @@
 #include "variometer.h"
-#include <cmath>
+
 
 Variometer::Variometer(QJsonObject params, int nr, InstrumentPanel *parent, bool edit) :
     FlapsIndicator(params, nr, parent, edit)

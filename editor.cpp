@@ -1,5 +1,6 @@
 #include "editor.h"
 #include "genericindicator.h"
+#include <cmath>
 #include <iostream>
 using namespace std;
 Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
@@ -16,6 +17,8 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
     QAction *addflaps = new QAction("Flaps", addmenu);
     QAction *addvario = new QAction("Variometer", addmenu);
     QAction *addmap = new QAction("Map", addmenu);
+    QAction *addtarget = new QAction("Target Distance", addmenu);
+
 
 
 
@@ -23,12 +26,15 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
     addmenu->addAction(addflaps);
     addmenu->addAction(addvario);
     addmenu->addAction(addmap);
+    addmenu->addAction(addtarget);
+
 
 
     connect(addgeneric, SIGNAL(triggered()), this, SLOT(add_generic()));
     connect(addflaps, SIGNAL(triggered()), this, SLOT(add_flaps()));
     connect(addvario, SIGNAL(triggered()), this, SLOT(add_vario()));
     connect(addmap, SIGNAL(triggered()), this, SLOT(add_map()));
+    connect(addtarget, SIGNAL(triggered()), this, SLOT(add_target()));
 
 
     QPushButton *done = new QPushButton("Done");
@@ -166,6 +172,24 @@ void Editor::add_vario()
 
     instr.push_back(i);
     params["instruments"]=instr;
+    this->deleteLater();
+    emit settings_updated(&params);
+}
+
+void Editor::add_target()
+{
+    QJsonArray instr = params["instruments"].toArray();
+    QJsonObject i;
+    i["x"] = 0;
+    i["y"] = 0;
+    i["h"] =30;
+    i["w"] = 700;
+    i["type"] = "target";
+    cout<<"creating target"<<endl;
+
+    instr.push_back(i);
+    params["instruments"]=instr;
+    ask->deleteLater();
     this->deleteLater();
     emit settings_updated(&params);
 }

@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     genericindicator.cpp \
     editor.cpp \
     variometer.cpp \
-    mapindicator.cpp
+    mapindicator.cpp \
+    targetdistanceindicator.cpp
 
 HEADERS  += settings.h \
     instrument_panel.h \
@@ -31,7 +32,8 @@ HEADERS  += settings.h \
     genericindicator.h \
     editor.h \
     variometer.h \
-    mapindicator.h
+    mapindicator.h \
+    targetdistanceindicator.h
 
 CONFIG += openssl-linked
 MOBILITY = 

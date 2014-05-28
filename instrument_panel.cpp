@@ -4,6 +4,7 @@
 #include "variometer.h"
 #include "mapindicator.h"
 #include <iostream>
+#include "targetdistanceindicator.h"
 
 using namespace std;
 
@@ -63,6 +64,10 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
         else if(instrument["type"].toString()==QString("map"))
         {
             inst = new MapIndicator(instrument, i, this, editMode, overlay);
+        }
+        else if(instrument["type"].toString()==QString("target"))
+        {
+            inst = new TargetDistanceIndicator(instrument, i, this, editMode, overlay);
         }
         if(overlay)
         {
