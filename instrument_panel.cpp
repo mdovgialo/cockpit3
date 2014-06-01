@@ -61,6 +61,10 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
         {
             inst = new Variometer(instrument, i, this, editMode);
         }
+        else if(instrument["type"].toString()==QString("generic analogue"))
+        {
+            inst = new Variometer(instrument, i, this, editMode);
+        }
         else if(instrument["type"].toString()==QString("map"))
         {
             inst = new MapIndicator(instrument, i, this, editMode, overlay);

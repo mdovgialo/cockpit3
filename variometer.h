@@ -7,6 +7,9 @@ class Variometer : public FlapsIndicator
 protected:
     QPixmap* needlePix;
     QLabel needle;
+    double zeroangl;
+    double maxangl;
+    double maxanglvalue;
 public:
     explicit Variometer(QJsonObject params, int nr, InstrumentPanel *parent = 0, bool edit=1);
 

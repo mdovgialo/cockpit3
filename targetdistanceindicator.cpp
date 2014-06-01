@@ -6,8 +6,6 @@ TargetDistanceIndicator::TargetDistanceIndicator(QJsonObject params, int nr, Ins
     this->fonts = params["fonts"].toDouble();
 
     text.setText("Target distance 0000");
-    this->setLayout(new QVBoxLayout());
-    this->layout()->addWidget(&text);
     QFont f = text.font();
     f.setPointSizeF(this->fonts);
     text.setFont(f);

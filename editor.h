@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QList>
 #include <QJsonValueRef>
+ #include <QDoubleSpinBox>
 
 class InstrumentPanel;
 
@@ -19,6 +20,11 @@ class Editor : public QWidget
     QLineEdit* name;
     QLineEdit* title;
     QLineEdit* suffix;
+    QDoubleSpinBox* maxangleEdit;
+    QDoubleSpinBox* maxvalueEdit;
+    QLineEdit* back_picEdit;
+    QLineEdit* needle_picEdit;
+    QDoubleSpinBox* zeroangleEdit;
     QDialog* ask;
 
 public:
@@ -36,6 +42,8 @@ public slots:
     void add_flaps();
     void add_vario();
     void add_target();
+    void add_generic_analogue();
+    void add_generic_analogue_params();
 
     void add_map();
 
