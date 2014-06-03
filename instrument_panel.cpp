@@ -2,6 +2,7 @@
 #include "genericindicator.h"
 #include "flapsindicator.h"
 #include "variometer.h"
+#include "aviahorizonindicator.h"
 #include "mapindicator.h"
 #include <iostream>
 #include "targetdistanceindicator.h"
@@ -60,6 +61,10 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
         else if(instrument["type"].toString()==QString("vario"))
         {
             inst = new Variometer(instrument, i, this, editMode);
+        }
+        else if(instrument["type"].toString()==QString("aviahorizon"))
+        {
+            inst = new AviahorizonIndicator(instrument, i, this, editMode);
         }
         else if(instrument["type"].toString()==QString("generic analogue"))
         {

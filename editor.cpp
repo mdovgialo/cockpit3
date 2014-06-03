@@ -19,6 +19,8 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
 
     QAction *addflaps = new QAction("Flaps", addmenu);
     QAction *addvario = new QAction("Variometer", addmenu);
+    QAction *addhorizon = new QAction("Aviahorizon", addmenu);
+
     QAction *addmap = new QAction("Map", addmenu);
     QAction *addtarget = new QAction("Target Distance", addmenu);
 
@@ -30,6 +32,8 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
 
     addmenu->addAction(addflaps);
     addmenu->addAction(addvario);
+    addmenu->addAction(addhorizon);
+
     addmenu->addAction(addmap);
     addmenu->addAction(addtarget);
 
@@ -40,6 +44,8 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
 
     connect(addflaps, SIGNAL(triggered()), this, SLOT(add_flaps()));
     connect(addvario, SIGNAL(triggered()), this, SLOT(add_vario()));
+    connect(addhorizon, SIGNAL(triggered()), this, SLOT(add_horizon()));
+
     connect(addmap, SIGNAL(triggered()), this, SLOT(add_map()));
     connect(addtarget, SIGNAL(triggered()), this, SLOT(add_target()));
 
@@ -233,6 +239,29 @@ void Editor::add_vario()
     i["type"] = "vario";
     i["back_im"] = "./images/vario.png";
     i["needle_im"] = "./images/vario_needle.png";
+   i["zeroangl"] = 0.0;
+    i[  "maxangl"] = 180.0;
+    i ["maxanglvalue"] = 100.0;
+
+    instr.push_back(i);
+    params["instruments"]=instr;
+    this->deleteLater();
+    emit settings_updated(&params);
+}
+
+
+void Editor::add_horizon()
+{
+    QJsonArray instr = params["instruments"].toArray();
+    QJsonObject i;
+    i["x"] = 0;
+    i["y"] = 0;
+    i["h"] =200;
+    i["w"] =200;
+    i["type"] = "aviahorizon";
+
+    i["needle_im"] = "./images/horizon_plane.png";
+    i["back_im"] = "./images/horizon_back.png";
    i["zeroangl"] = 0.0;
     i[  "maxangl"] = 180.0;
     i ["maxanglvalue"] = 100.0;

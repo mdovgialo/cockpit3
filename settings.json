@@ -2,24 +2,6 @@
     "dt": 30,
     "instruments": [
         {
-            "fonts": 0,
-            "h": 65,
-            "ind_name": "flaps, %",
-            "type": "flaps",
-            "w": 76,
-            "x": 1297,
-            "y": 292
-        },
-        {
-            "fonts": 0,
-            "h": 228,
-            "ind_name": "Vy, %",
-            "type": "vario",
-            "w": 228,
-            "x": 1156,
-            "y": 194
-        },
-        {
             "fonts": 7.25,
             "h": 33,
             "ind_name": "power 1, hp",
@@ -76,12 +58,71 @@
         },
         {
             "fonts": 0,
-            "h": 392,
+            "h": 391,
             "ind_name": "Map",
             "type": "map",
-            "w": 392,
+            "w": 391,
             "x": 971,
             "y": 374
+        },
+        {
+            "fonts": 0,
+            "h": 75,
+            "ind_name": "flaps, %",
+            "type": "flaps",
+            "w": 75,
+            "x": 1299,
+            "y": 276
+        },
+        {
+            "fonts": 15.25,
+            "h": 46,
+            "type": "target",
+            "w": 224,
+            "x": 1152,
+            "y": 339
+        },
+        {
+            "back_im": "./images/vario.png",
+            "fonts": 0,
+            "h": 254,
+            "ind_name": "Vy, m/s",
+            "maxangl": 180,
+            "maxanglvalue": 100,
+            "needle_im": "./images/vario_needle.png",
+            "type": "vario",
+            "w": 254,
+            "x": 1149,
+            "y": 161,
+            "zeroangl": 0
+        },
+        {
+            "back_im": "./images/horizon_back.png",
+            "fonts": 0,
+            "h": 90,
+            "maxangl": 180,
+            "maxanglvalue": 100,
+            "needle_im": "./images/horizon_plane.png",
+            "type": "aviahorizon",
+            "w": 90,
+            "x": 1284,
+            "y": 108,
+            "zeroangl": 0
+        },
+        {
+            "back_im": "./images/slide.png",
+            "fonts": 0,
+            "h": 107,
+            "ind_name": "AoS, deg",
+            "maxangl": 180,
+            "maxanglvalue": 90,
+            "needle_im": "./images/vario_needle.png",
+            "title": "Slide",
+            "type": "generic analogue",
+            "w": 107,
+            "x": 1232,
+            "y": 205,
+            "zeroangl": 90
         }
     ],
     "url": "http://localhost:8111"

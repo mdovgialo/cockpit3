@@ -41,6 +41,7 @@ public slots:
     void add_generic_params();
     void add_flaps();
     void add_vario();
+    void add_horizon();
     void add_target();
     void add_generic_analogue();
     void add_generic_analogue_params();
