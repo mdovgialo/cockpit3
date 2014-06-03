@@ -53,8 +53,8 @@
             "title": "Oil ",
             "type": "generic",
             "w": 90,
-            "x": 1238,
-            "y": 258
+            "x": 1243,
+            "y": 247
         },
         {
             "fonts": 0,
@@ -92,36 +92,36 @@
             "needle_im": "./images/vario_needle.png",
             "type": "vario",
             "w": 254,
-            "x": 1149,
-            "y": 161,
+            "x": 1145,
+            "y": 159,
             "zeroangl": 0
         },
         {
             "back_im": "./images/horizon_back.png",
             "fonts": 0,
-            "h": 90,
+            "h": 111,
             "maxangl": 180,
             "maxanglvalue": 100,
             "needle_im": "./images/horizon_plane.png",
             "type": "aviahorizon",
-            "w": 90,
-            "x": 1284,
-            "y": 108,
+            "w": 111,
+            "x": 1268,
+            "y": 91,
             "zeroangl": 0
         },
         {
             "back_im": "./images/slide.png",
             "fonts": 0,
-            "h": 107,
+            "h": 104,
             "ind_name": "AoS, deg",
             "maxangl": 180,
             "maxanglvalue": 90,
             "needle_im": "./images/vario_needle.png",
             "title": "Slide",
             "type": "generic analogue",
-            "w": 107,
-            "x": 1232,
-            "y": 205,
+            "w": 104,
+            "x": 1228,
+            "y": 206,
             "zeroangl": 90
         }
     ],

@@ -18,12 +18,12 @@ void AviahorizonIndicator::update_ind(Gamestate* actual)
 
         QPixmap needlerot(needlePix->scaled(text.size(), Qt::KeepAspectRatio));
         painter->begin(&dev);
-
+        painter->translate(0, h/90*text.size().height()/2);
         painter->translate(text.size().height()/2, text.size().width()/2);
         painter->rotate(-w);
         painter->translate(-text.size().height()/2,-text.size().height()/2);
 
-        painter->translate(0, h/90*text.size().height()/2);
+
 
         painter->drawPixmap(0,0, needlerot);
         painter->end();
