@@ -6,6 +6,7 @@
 #include "mapindicator.h"
 #include <iostream>
 #include "targetdistanceindicator.h"
+#include <QByteArray>
 
 using namespace std;
 
@@ -94,6 +95,21 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
     {
         map_updated();
         update_stuff();
+    }
+    if(not overlay)
+    {
+        cout <<"setting geometry "<<endl;
+        QJsonArray geo(settings["window_geometry"].toArray());
+
+        if(geo[4].toBool())
+        {
+            parent->showMaximized();
+        }
+        else
+        {
+        parent->move(geo[0].toDouble(), geo[1].toDouble());
+        parent->resize(geo[2].toDouble(), geo[3].toDouble());
+        }
     }
 
 }

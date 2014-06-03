@@ -34,6 +34,18 @@ Cockpit::Cockpit(bool overlay):overlay(overlay)
 void Cockpit::savesettings()
 {
      QFile saveFile(SETTINGSFILE);
+     if(not overlay)
+     {
+         QJsonObject ss(settings.object());
+         QJsonArray geo;
+         geo.push_back(QJsonValue( this->pos().x()));
+         geo.push_back(QJsonValue( this->pos().y()));
+         geo.push_back(QJsonValue( this->width()));
+         geo.push_back(QJsonValue( this->height()));
+         geo.push_back(QJsonValue(double(this->isMaximized())));
+         ss["window_geometry"] = geo;
+         settings.setObject(ss);
+     }
      saveFile.open(QIODevice::WriteOnly);
      saveFile.write(settings.toJson());
      cout << "writing json!" <<endl;
