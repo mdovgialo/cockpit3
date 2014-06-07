@@ -161,7 +161,7 @@ void MapIndicator::update_ind(Gamestate* actual)
 
                //obj->setStyleSheet(QString("QLabel { color: ") + mapObj[i].toObject()["color"].toString()+QString("}"));
 
-               obj->move(mapX-5, mapY-5);
+               obj->move(mapX-obj->fontMetrics().size(Qt::TextSingleLine, "0").height()/2, mapY-obj->fontMetrics().size(Qt::TextSingleLine, "0").height()/2);
                obj->show();
            }
 
