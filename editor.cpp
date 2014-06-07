@@ -1,6 +1,7 @@
 #include "editor.h"
 #include "genericindicator.h"
 #include <QDoubleValidator>
+ #include <QMessageBox>
 #include <cmath>
 #include <iostream>
 using namespace std;
@@ -219,6 +220,9 @@ void Editor::add_map()
     i["w"] =300;
     i["ind_name"] = "Map";
     i["type"] = "map";
+    bool scaling_text = (QMessageBox::Yes== QMessageBox::question(this, "Scale font?", "Scale map font?",QMessageBox::Yes, QMessageBox::No));
+
+    i["scaling_text"] = scaling_text;
 
 
     instr.push_back(i);

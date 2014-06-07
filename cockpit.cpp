@@ -58,6 +58,7 @@ void Cockpit::set_overlay(int check)
 
     if(check)
     {
+        savesettings();
 
         Cockpit* nc = new Cockpit(1);
         nc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);

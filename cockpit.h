@@ -45,6 +45,7 @@ public slots:
 
     void run_cockpit()
     {
+
         this->centralWidget()->deleteLater();
         InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, 0, overlay);
         setCentralWidget(ip);
@@ -66,6 +67,7 @@ public slots:
     }
     void run_settings(QJsonObject* newsettings=0)
     {
+
         if (newsettings)
         {
             settings.setObject(*newsettings);

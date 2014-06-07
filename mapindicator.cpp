@@ -110,7 +110,7 @@ void MapIndicator::update_ind(Gamestate* actual)
            {
                obj = new QLabel(mapObjects);
                obj->setText( QString::number(dist));
-               if(this->size().width()>400)
+               if(this->size().width()>400  and params["scaling_text"].toBool())
                {
                    QFont ff = obj->font();
                    ff.setPixelSize(this->size().width()/26);
@@ -149,7 +149,7 @@ void MapIndicator::update_ind(Gamestate* actual)
                      obj->setText("o");
                      obj->setStyleSheet(QString("QLabel { font: bold; color: green}"));
                }
-               if(this->size().width()>400)
+               if(this->size().width()>400 and params["scaling_text"].toBool())
                {
                    QFont ff = obj->font();
                    ff.setPixelSize(this->size().width()/26);
