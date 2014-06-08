@@ -7,7 +7,8 @@
 #include <QLineEdit>
 #include <QList>
 #include <QJsonValueRef>
- #include <QDoubleSpinBox>
+#include <QDoubleSpinBox>
+#include <QCheckBox>
 
 class InstrumentPanel;
 
@@ -20,6 +21,12 @@ class Editor : public QWidget
     QLineEdit* name;
     QLineEdit* title;
     QLineEdit* suffix;
+    QLineEdit* customColor;
+    QLineEdit* criticalColor;
+    QLineEdit* fontName;
+    QDoubleSpinBox* criticalValue;
+    QCheckBox* hideValue;
+
     QDoubleSpinBox* maxangleEdit;
     QDoubleSpinBox* maxvalueEdit;
     QLineEdit* back_picEdit;

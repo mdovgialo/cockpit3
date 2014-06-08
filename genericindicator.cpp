@@ -9,17 +9,20 @@ GenericIndicator::GenericIndicator(QJsonObject params, int nr, InstrumentPanel *
 {
 
 
+    QFont fontstyle(params["font"].toString());
+
+    text.setFont(fontstyle);
 
     this->fonts = params["fonts"].toDouble();
 
-    text.setText(params["title"].toString() +QString("0000")+ params["suffix"].toString());
+    text.setText(params["title"].toString() +QString("000000000")+ params["suffix"].toString());
     this->setLayout(new QVBoxLayout());
     this->layout()->addWidget(&text);
     QFont f = text.font();
     f.setPointSizeF(this->fonts);
     text.setFont(f);
     text.resize((text.fontMetrics().boundingRect(text.text()).size()*=1.1)+=QSize(20, 20));
-    //setGeometry(this->x(), this->y(),text.size().width(), text.size().height());
+
     this->move(params["x"].toDouble(), params["y"].toDouble());
     this->resize(text.size());
     text.move(0,0);
@@ -29,7 +32,8 @@ GenericIndicator::GenericIndicator(QJsonObject params, int nr, InstrumentPanel *
 void GenericIndicator::update_ind(Gamestate *upd)
 {
     QString ind = params["ind_name"].toString();
-    QString data;
+    QString data = "%1";
+    double value;
 
     if(upd->state.object()["valid"].toBool())
     {
@@ -38,19 +42,40 @@ void GenericIndicator::update_ind(Gamestate *upd)
         if(! upd->indicators.object()[ind].isNull())
         {
             cout << "reading as indicators"<<endl;
-            data = QString::number( upd->indicators.object()[ind].toDouble());
+            value  =upd->state.object()[ind].toDouble();
+            data = data.arg(value, params["field_size"].toInt(), 'f', params["precision"].toInt());
+
+            //data = QString::number( upd->indicators.object()[ind].toDouble());
 
         }
         else if(! upd->state.object()[ind].isNull())
         {
-            data = QString::number(upd->state.object()[ind].toDouble());
+            value = upd->state.object()[ind].toDouble();
+            data = data.arg(value, params["field_size"].toInt(), 'f', params["precision"].toInt());
+            //data = QString::number(upd->state.object()[ind].toDouble());
         }
         else
         {
             data = "N/A";
             this->hide();
         }
-            text.setText(params["title"].toString() + data + params["suffix"].toString());
+        if(params["hide_data"].toBool())
+        {
+            data = "";
+        }
+        QString textColor;
+        if (value>params["critical_value"].toDouble())
+        {
+            textColor = params["critical_color"].toString();
+        }
+        else
+        {
+            textColor = params["color"].toString();
+
+        }
+        text.setStyleSheet(QString("color:")+textColor);
+
+        text.setText(params["title"].toString() + data + params["suffix"].toString());
     }
     else
     {

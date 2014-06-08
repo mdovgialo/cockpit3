@@ -109,13 +109,61 @@ void Editor::add_generic()
     name = new QLineEdit("In game indicator name");
     title = new QLineEdit("Title");
     suffix = new QLineEdit("Suffix");
+    maxangleEdit = new QDoubleSpinBox;
+    maxvalueEdit = new QDoubleSpinBox ;
+
+    customColor = new QLineEdit("white");
+    criticalColor = new QLineEdit("red");
+    criticalValue = new QDoubleSpinBox;
+    criticalValue->setMaximum(9999999);
+    fontName = new QLineEdit("Tahoma");
+    hideValue = new QCheckBox("Hide data value? (for text only labels connected to indicator)");
+
     QPushButton* ok = new QPushButton("ok");
     ask->layout()->addWidget(name);
     ask->layout()->addWidget(title);
     ask->layout()->addWidget(suffix);
+    ask->layout()->addWidget(new QLabel("field size"));
+    ask->layout()->addWidget(maxangleEdit);
+    ask->layout()->addWidget(new QLabel("precision"));
+    ask->layout()->addWidget(maxvalueEdit);
+    ask->layout()->addWidget(new QLabel("Label color"));
+    ask->layout()->addWidget(customColor);
+    ask->layout()->addWidget(new QLabel("Label critical color"));
+    ask->layout()->addWidget(criticalColor);
+    ask->layout()->addWidget(criticalValue);
+    ask->layout()->addWidget(hideValue);
+    ask->layout()->addWidget(new QLabel("Font family:"));
+    ask->layout()->addWidget(fontName);
     ask->layout()->addWidget(ok);
     ask->show();
     connect(ok, SIGNAL(clicked()), this, SLOT(add_generic_params()));
+}
+
+void Editor::add_generic_params()
+{
+    QJsonArray instr = params["instruments"].toArray();
+    QJsonObject i;
+    i["x"] = 0;
+    i["y"] = 0;
+    i["h"] =30;
+    i["w"] = 700;
+    i["ind_name"] = name->text();
+    i["type"] = "generic";
+    i["title"] = title->text();
+    i["suffix"] = suffix->text();
+    i["field_size"] = maxangleEdit->value();
+    i["precision"] = maxvalueEdit->value();
+    i["color"] = customColor->text();
+    i["critical_color"] = criticalColor->text();
+    i["critical_value"] = criticalValue->value();
+    i["hide_data"] = hideValue->isChecked();
+    i["font"] = fontName->text();
+    instr.push_back(i);
+    params["instruments"]=instr;
+    ask->deleteLater();
+    this->deleteLater();
+    emit settings_updated(&params);
 }
 
 void Editor::add_generic_analogue()
@@ -150,24 +198,7 @@ void Editor::add_generic_analogue()
     connect(ok, SIGNAL(clicked()), this, SLOT(add_generic_analogue_params()));
 }
 
-void Editor::add_generic_params()
-{
-    QJsonArray instr = params["instruments"].toArray();
-    QJsonObject i;
-    i["x"] = 0;
-    i["y"] = 0;
-    i["h"] =30;
-    i["w"] = 700;
-    i["ind_name"] = name->text();
-    i["type"] = "generic";
-    i["title"] = title->text();
-    i["suffix"] = suffix->text();
-    instr.push_back(i);
-    params["instruments"]=instr;
-    ask->deleteLater();
-    this->deleteLater();
-    emit settings_updated(&params);
-}
+
 void Editor::add_generic_analogue_params()
 {
     QJsonArray instr = params["instruments"].toArray();
