@@ -39,6 +39,8 @@ public slots:
 protected:
     bool editMode;
     bool moving;
+    bool gridMoving;
+
     float fonts;
     QJsonObject params;
     QLabel text;

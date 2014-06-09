@@ -88,8 +88,18 @@ void GenericIndicator::update_ind(Gamestate *upd)
  {
      if (editMode)
      {
-        this->moving=true;
-         cout<< "MOVE!!!"<<endl;
+         if(e->button() == Qt::RightButton)
+         {
+             this->gridMoving = true;
+             this->moving=false;
+
+         }
+         else
+         {
+            this->moving=true;
+            this->gridMoving=false;
+         }
+
      }
  }
 
@@ -100,6 +110,21 @@ void GenericIndicator::mouseMoveEvent(QMouseEvent *e)
         QPoint cur = this->parentWidget()->mapFromGlobal(QCursor::pos());
         this->move(cur.x(), cur.y());
     }
+    if(editMode and gridMoving)
+    {
+        int gridsize = 25;
+        QPoint cur = this->parentWidget()->mapFromGlobal(QCursor::pos());
+        int x, y;
+
+        x = cur.x();
+        y = cur.y();
+        x = x/gridsize;
+        x = x*gridsize;
+        y = y/gridsize;
+        y = y*gridsize;
+
+        this->move(x, y);
+    }
 
 }
 
@@ -109,6 +134,7 @@ void GenericIndicator::mouseReleaseEvent(QMouseEvent *e)
     {
 
         this->moving = false;
+        this->gridMoving = false;
 
     }
 }
