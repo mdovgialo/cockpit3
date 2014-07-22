@@ -50,6 +50,7 @@ public slots:
     void add_vario();
     void add_horizon();
     void add_target();
+    void add_target_angle();
     void add_generic_analogue();
     void add_generic_analogue_params();
 

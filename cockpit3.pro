@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     variometer.cpp \
     mapindicator.cpp \
     targetdistanceindicator.cpp \
-    aviahorizonindicator.cpp
+    aviahorizonindicator.cpp \
+    angletotargetindicator.cpp
 
 HEADERS  += settings.h \
     instrument_panel.h \
@@ -35,7 +36,8 @@ HEADERS  += settings.h \
     variometer.h \
     mapindicator.h \
     targetdistanceindicator.h \
-    aviahorizonindicator.h
+    aviahorizonindicator.h \
+    angletotargetindicator.h
 
 CONFIG += openssl-linked
 MOBILITY = 
@@ -45,7 +47,10 @@ OTHER_FILES += \
     settings.json \
     images/flaps.png \
     images/vario.png \
-    images/vario_needle.png
+    images/vario_needle.png \
+    android/AndroidManifest.xml
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 
 

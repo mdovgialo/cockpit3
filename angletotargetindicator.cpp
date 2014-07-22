@@ -1,6 +1,8 @@
-#include "targetdistanceindicator.h"
+#include "angletotargetindicator.h"
+
+
 #include <cmath>
-TargetDistanceIndicator::TargetDistanceIndicator(QJsonObject params, int nr, InstrumentPanel *parent, bool edit, bool overlay) :
+angletotargetindicator::angletotargetindicator(QJsonObject params, int nr, InstrumentPanel *parent, bool edit, bool overlay) :
     GenericIndicator(params, nr, parent, edit, overlay)
 {
     this->fonts = params["fonts"].toDouble();
@@ -11,7 +13,7 @@ TargetDistanceIndicator::TargetDistanceIndicator(QJsonObject params, int nr, Ins
     }
     else
     {
-     text.setText("Target distance 0000");
+     text.setText("Angle: 000000");
      }
 
     QFont f = text.font();
@@ -30,7 +32,7 @@ TargetDistanceIndicator::TargetDistanceIndicator(QJsonObject params, int nr, Ins
     connect(parent, SIGNAL(map_update(Gamestate*)), this, SLOT(update_ind(Gamestate*)));
 }
 
-void TargetDistanceIndicator::update_ind(Gamestate *actual)
+void angletotargetindicator::update_ind(Gamestate *actual)
 {
     QJsonArray mapObj = actual->mapObj.array();
 
@@ -64,7 +66,7 @@ void TargetDistanceIndicator::update_ind(Gamestate *actual)
     {
         double playerX = mapObj[player].toObject()["x"].toDouble();
         double playerY = mapObj[player].toObject()["y"].toDouble();
-
+        double playerAngle = (atan2(mapObj[player].toObject()["dy"].toDouble(), mapObj[player].toObject()["dx"].toDouble())*180)/M_PI;
 
 
 
@@ -74,17 +76,19 @@ void TargetDistanceIndicator::update_ind(Gamestate *actual)
 
            double x = mapObj[i].toObject()["x"].toDouble();
            double y = mapObj[i].toObject()["y"].toDouble();
-           int dist = sqrt((x-playerX)*mapW*(x-playerX)*mapW+(y-playerY)*mapH*(y-playerY)*mapW);
+           double enemyAngle = (atan2((y-playerY), (x-playerX))*180)/M_PI;
+           int relAngle =playerAngle - enemyAngle;
+           //int dist = sqrt((x-playerX)*mapW*(x-playerX)*mapW+(y-playerY)*mapH*(y-playerY)*mapW);
 
            if( mapObj[i].toObject()["icon_bg"].toString().indexOf("Target")>-1)
            {
                 if(params["text"].toString().size())
                 {
-                    text.setText( params["text"].toString()+QString::number(dist));
+                    text.setText( params["text"].toString()+QString::number(relAngle));
                 }
                 else
                 {
-               text.setText( QString("Target distance: ")+QString::number(dist));
+               text.setText( QString("Angle: ")+QString::number(relAngle));
               }
                // obj->setStyleSheet(QString("QLabel { color: ") + mapObj[i].toObject()["color"].toString()+QString("}"));
 

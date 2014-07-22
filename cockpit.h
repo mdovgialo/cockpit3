@@ -49,7 +49,7 @@ public slots:
         this->centralWidget()->deleteLater();
         InstrumentPanel* ip= new InstrumentPanel(settings.object(), this, 0, overlay);
         setCentralWidget(ip);
-
+        //ip->show();
     }
 
     void run_edit(QJsonObject* newsettings=0)

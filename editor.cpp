@@ -24,6 +24,7 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
 
     QAction *addmap = new QAction("Map", addmenu);
     QAction *addtarget = new QAction("Target Distance", addmenu);
+    QAction *addtargetangle = new QAction("Target Angle", addmenu);
 
 
 
@@ -37,6 +38,7 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
 
     addmenu->addAction(addmap);
     addmenu->addAction(addtarget);
+    addmenu->addAction(addtargetangle);
 
 
 
@@ -49,6 +51,7 @@ Editor::Editor(QJsonObject params, InstrumentPanel *panel, QWidget *parent ) :
 
     connect(addmap, SIGNAL(triggered()), this, SLOT(add_map()));
     connect(addtarget, SIGNAL(triggered()), this, SLOT(add_target()));
+    connect(addtargetangle, SIGNAL(triggered()), this, SLOT(add_target_angle()));
 
 
     QPushButton *done = new QPushButton("Done");
@@ -317,6 +320,24 @@ void Editor::add_target()
     i["w"] = 700;
     i["type"] = "target";
     cout<<"creating target"<<endl;
+
+    instr.push_back(i);
+    params["instruments"]=instr;
+    ask->deleteLater();
+    this->deleteLater();
+    emit settings_updated(&params);
+}
+
+void Editor::add_target_angle()
+{
+    QJsonArray instr = params["instruments"].toArray();
+    QJsonObject i;
+    i["x"] = 0;
+    i["y"] = 0;
+    i["h"] =30;
+    i["w"] = 700;
+    i["type"] = "targetangle";
+    cout<<"creating target angle"<<endl;
 
     instr.push_back(i);
     params["instruments"]=instr;

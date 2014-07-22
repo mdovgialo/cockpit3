@@ -16,7 +16,7 @@ Gamestate::~Gamestate()
 }
 void Gamestate::parse(QNetworkReply* reply)
 {
-    //cout << reply->error()<<endl;
+    cout << reply->error()<<endl;
     if((not reply->error()))
     {
         QString p = reply->url().path();
@@ -48,6 +48,7 @@ void Gamestate::parse(QNetworkReply* reply)
 
 void Gamestate::update()
 {
+   // cout << "trying to get gamestate from "<<url.toString().toStdString()<<endl;
  url.setPath(QString("/state"));
  manager->get(QNetworkRequest(url));
  url.setPath(QString("/indicators"));

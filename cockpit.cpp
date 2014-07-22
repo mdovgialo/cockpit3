@@ -3,6 +3,9 @@
 #include <QCoreApplication>
 //#define SETTINGSFILE "C:/Users/Marian/Documents/warthunder_cockpit/cockpit30Qt/build-cockpit3-Desktop_Qt_5_3_0_MinGW_32bit-Release/release/settings.json"
 #define SETTINGSFILE "settings.json"
+#ifdef __ANDROID_API__
+#define SETTINGSFILE "/mnt/sdcard/warthunder_cockpit.json"
+#endif
 
 using namespace std;
 Cockpit::Cockpit(bool overlay):overlay(overlay)

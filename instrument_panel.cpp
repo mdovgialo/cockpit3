@@ -6,6 +6,7 @@
 #include "mapindicator.h"
 #include <iostream>
 #include "targetdistanceindicator.h"
+#include "angletotargetindicator.h"
 #include <QByteArray>
 
 using namespace std;
@@ -14,6 +15,7 @@ using namespace std;
 InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool editMode, bool overlay):
     actual(settings.find("url").value().toString()), overlay(overlay), settings(settings)
 {
+    cout << "starting instrument panel" << endl;
     this->editMode = editMode;
     int dt = settings.find("dt").value().toDouble();
     connect(&actual, SIGNAL(parseFinished()), this, SLOT(update_stuff()));
@@ -78,6 +80,10 @@ InstrumentPanel::InstrumentPanel(QJsonObject settings, QWidget *parent, bool edi
         else if(instrument["type"].toString()==QString("target"))
         {
             inst = new TargetDistanceIndicator(instrument, i, this, editMode, overlay);
+        }
+        else if(instrument["type"].toString()==QString("targetangle"))
+        {
+            inst = new angletotargetindicator(instrument, i, this, editMode, overlay);
         }
         if(overlay)
         {
